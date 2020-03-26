@@ -51,3 +51,6 @@ workingsets.xml
 bench-results.json
 jmh_result.json
 /vm/src/installer/dist/
+mx/
+
+simpletool/
