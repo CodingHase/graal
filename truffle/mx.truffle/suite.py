@@ -694,6 +694,32 @@ suite = {
       "workingSets" : "Truffle,SimpleLanguage",
       "testProject" : True,
     },
+    
+    "com.oracle.truffle.trace" : {
+      "subDir" : "src",
+      "sourceDirs" : ["src"],
+      "dependencies" : [
+        "TRUFFLE_API",
+      ],
+      "javaCompliance" : "8+",
+      "checkstyleVersion" : "8.8",
+      "annotationProcessors" : ["TRUFFLE_DSL_PROCESSOR"],
+      "workingSets" : "Truffle,SimpleLanguage",
+    },
+
+    "com.oracle.truffle.trace.test" : {
+      "subDir" : "src",
+      "sourceDirs" : ["src"],
+      "dependencies" : [
+        "mx:JUNIT",
+        "com.oracle.truffle.trace"
+      ],
+      "javaCompliance" : "8+",
+      "checkstyleVersion" : "8.8",
+      "annotationProcessors" : ["TRUFFLE_DSL_PROCESSOR"],
+      "workingSets" : "Truffle,SimpleLanguage",
+      "testProject" : True,
+    },
 
     "com.oracle.graalvm.locator": {
       "subDir": "src",
@@ -1018,6 +1044,39 @@ suite = {
       "javaCompliance" : "8+",
       "dependencies" : [
         "com.oracle.truffle.st.test"
+      ],
+      "exclude" : [
+        "mx:JUNIT",
+      ],
+      "distDependencies" : [
+        "TRUFFLE_API",
+        "TRUFFLE_ST"
+      ],
+      "maven" : False
+    },
+    
+    "TRUFFLE_TRACE" : {
+      "subDir" : "src",
+      "javaCompliance" : "8+",
+      "dependencies" : [
+        "com.oracle.truffle.trace",
+      ],
+      "exclude" : [
+        "mx:JUNIT",
+      ],
+      "distDependencies" : [
+          "TRUFFLE_API",
+      ],
+      "description" : "Truffle Trace is an example tool implemented using the Truffle API.",
+      "allowsJavadocWarnings": True,
+      "maven" : False
+    },
+
+    "TRUFFLE_TRACE_TEST" : {
+      "subDir" : "src",
+      "javaCompliance" : "8+",
+      "dependencies" : [
+        "com.oracle.truffle.trace.test"
       ],
       "exclude" : [
         "mx:JUNIT",
