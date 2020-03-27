@@ -56,7 +56,7 @@ import com.oracle.truffle.api.source.SourceSection;
  */
 final class CoverageNode extends ExecutionEventNode {
 
-    private final SimpleCoverageInstrument instrument;
+    private final TraceInstrument instrument;
     @CompilerDirectives.CompilationFinal private boolean covered;
 
     /**
@@ -64,7 +64,7 @@ final class CoverageNode extends ExecutionEventNode {
      */
     private final SourceSection instrumentedSourceSection;
 
-    CoverageNode(SimpleCoverageInstrument instrument, SourceSection instrumentedSourceSection) {
+    CoverageNode(TraceInstrument instrument, SourceSection instrumentedSourceSection) {
         this.instrument = instrument;
         this.instrumentedSourceSection = instrumentedSourceSection;
     }

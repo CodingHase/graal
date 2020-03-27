@@ -74,14 +74,13 @@ import com.oracle.truffle.api.source.SourceSection;
  * annotation. The annotation specifies a unique {@link Registration#id}, a human readable
  * {@link Registration#name} and {@link Registration#version} for the instrument. It also specifies
  * all service classes that the instrument exports to other instruments and, exceptionally, tests.
- * In this case the instrument itself is exported as a service and used in the
- * SimpleCoverageInstrumentTest.
+ * In this case the instrument itself is exported as a service and used in the TraceInstrumentTest.
  *
  * NOTE: Fot the registration annotation to work the truffle dsl processor must be used (i.e. Must
  * be a dependency. This is so in this maven project, as can be seen in the pom file.
  */
-@Registration(id = SimpleCoverageInstrument.ID, name = "Simple Code Coverage", version = "0.1", services = SimpleCoverageInstrument.class)
-public final class SimpleCoverageInstrument extends TruffleInstrument {
+@Registration(id = TraceInstrument.ID, name = "Simple Code Coverage", version = "0.1", services = TraceInstrument.class)
+public final class TraceInstrument extends TruffleInstrument {
 
     // @formatter:off
     /**
@@ -93,11 +92,11 @@ public final class SimpleCoverageInstrument extends TruffleInstrument {
     /**
      * Look at {@link #onCreate(Env)} and {@link #getOptionDescriptors()} for more info.
      */
-    @Option(name = "PrintCoverage", help = "Print coverage to stdout on process exit (default: true).", category = OptionCategory.USER, stability = OptionStability.STABLE)
-    static final OptionKey<Boolean> PRINT_COVERAGE = new OptionKey<>(true);
+    @Option(name = "PrintTrace", help = "Print coverage to stdout on process exit (default: true). Change to print the executed trace", category = OptionCategory.USER, stability = OptionStability.STABLE)
+    static final OptionKey<Boolean> PRINT_TRACE = new OptionKey<>(true);
     // @formatter:on
 
-    public static final String ID = "simple-code-coverage";
+    public static final String ID = "trace";
 
     /**
      * The instrument keeps a mapping between a {@link Source} and {@link Coverage coverage} data
@@ -117,8 +116,8 @@ public final class SimpleCoverageInstrument extends TruffleInstrument {
      * This method is used to properly initialize the instrument. A common practice is to use the
      * {@link Option} system to enable and configure the instrument, as is done in this method.
      * Defining {@link Option}s as is shown in {@link #ENABLED} and {@link #PRINT_COVERAGE}, and
-     * their usage can be seen in the SimpleCoverageInstrumentTest when the context is being
-     * created. Using them from the command line is shown in the simpletool.sh script.
+     * their usage can be seen in the TraceInstrumentTest when the context is being created. Using
+     * them from the command line is shown in the simpletool.sh script.
      *
      * @param env the environment for the instrument. Allows us to read the {@link Option}s, input
      *            and output streams to be used for reading and writing, as well as
@@ -180,7 +179,7 @@ public final class SimpleCoverageInstrument extends TruffleInstrument {
      */
     @Override
     protected void onDispose(Env env) {
-        if (PRINT_COVERAGE.getValue(env.getOptions())) {
+        if (PRINT_TRACE.getValue(env.getOptions())) {
             printResults(env);
         }
     }
@@ -243,7 +242,7 @@ public final class SimpleCoverageInstrument extends TruffleInstrument {
      */
     @Override
     protected OptionDescriptors getOptionDescriptors() {
-        return new SimpleCoverageInstrumentOptionDescriptors();
+        return new TraceInstrumentOptionDescriptors();
     }
 
     /**

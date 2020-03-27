@@ -55,9 +55,9 @@ import com.oracle.truffle.api.source.SourceSection;
  */
 final class GatherSourceSectionsListener implements LoadSourceSectionListener {
 
-    private final SimpleCoverageInstrument instrument;
+    private final TraceInstrument instrument;
 
-    GatherSourceSectionsListener(SimpleCoverageInstrument instrument) {
+    GatherSourceSectionsListener(TraceInstrument instrument) {
         this.instrument = instrument;
     }
 

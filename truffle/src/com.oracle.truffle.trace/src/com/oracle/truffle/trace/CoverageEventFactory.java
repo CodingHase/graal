@@ -55,10 +55,10 @@ import com.oracle.truffle.api.source.SourceSection;
  */
 final class CoverageEventFactory implements ExecutionEventNodeFactory {
 
-    private SimpleCoverageInstrument simpleCoverageInstrument;
+    private TraceInstrument traceInstrument;
 
-    CoverageEventFactory(SimpleCoverageInstrument simpleCoverageInstrument) {
-        this.simpleCoverageInstrument = simpleCoverageInstrument;
+    CoverageEventFactory(TraceInstrument traceInstrument) {
+        this.traceInstrument = traceInstrument;
     }
 
     /**
@@ -67,6 +67,6 @@ final class CoverageEventFactory implements ExecutionEventNodeFactory {
      * @return An {@link ExecutionEventNode}
      */
     public ExecutionEventNode create(final EventContext ec) {
-        return new CoverageNode(simpleCoverageInstrument, ec.getInstrumentedSourceSection());
+        return new CoverageNode(traceInstrument, ec.getInstrumentedSourceSection());
     }
 }
